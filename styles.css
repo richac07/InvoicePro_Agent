@@ -1,4 +1,30 @@
-/* Global Styles */
+/* Modern Design System Tokens */
+:root {
+  --primary: #10b981;
+  /* Emerald 500 */
+  --primary-dark: #059669;
+  /* Emerald 600 */
+  --secondary: #6366f1;
+  /* Indigo 500 */
+  --secondary-dark: #4f46e5;
+  /* Indigo 600 */
+  --bg-main: #f8fafc;
+  /* Slate 50 */
+  --bg-card: #ffffff;
+  --text-main: #1e293b;
+  /* Slate 800 */
+  --text-muted: #64748b;
+  /* Slate 500 */
+  --border: #e2e8f0;
+  /* Slate 200 */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --radius: 12px;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Global Reset & Base Styles */
 * {
   margin: 0;
   padding: 0;
@@ -6,422 +32,316 @@
 }
 
 body {
-  font-family: 'Arial', sans-serif;
-  background: linear-gradient(135deg, #4CAF50, #2196F3); /* Gradient from green to blue */
-  color: #333;
-  line-height: 1.6;
-  min-height: 100vh; /* Ensures the gradient covers the full height */
-  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  line-height: 1.5;
+  min-height: 100vh;
+  padding: 2rem 1rem;
 }
 
 .container {
-  width: 90%;
-  max-width: 1200px;
-  margin: 30px auto;
-  background: linear-gradient(145deg, #ffffff, #f8f8f8); /* Subtle gradient for container */
-  padding: 25px;
-  border-radius: 10px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Softer shadow for a modern look */
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
-h1, h2, h3 {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #2c3e50; /* Darker color for professionalism */
-}
-
+/* Typography */
 h1 {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: 2rem;
+  letter-spacing: -0.025em;
   text-align: center;
-  margin-bottom: 20px;
-  font-size: 2rem; /* Slightly larger for emphasis */
-  font-weight: bold;
-  color: #4CAF50;
-}
-
-.company-name {
-  font-size: 1.5rem; /* Slightly smaller for balance */
-  color: #FFD700; /* Golden color */
-  font-weight: bold;
-  text-align: right;
-  margin-bottom: 20px;
-}
-
-h2, h3 {
-  margin-bottom: 10px;
-  font-weight: 600;
-  color: #4CAF50;
-}
-
-/* Section Styling */
-.section {
-  margin-bottom: 25px;
-}
-
-select, input[type="number"], button {
-  width: 100%;
-  padding: 12px;
-  margin: 5px 0 15px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
-}
-
-select:focus, input[type="number"]:focus, button:focus {
-  outline: none;
-  border-color: #4CAF50;
-  box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
-}
-
-button {
-  background-color: #4CAF50;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: #45a049;
-}
-
-button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-/* Radio Button Styling */
-#radio-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-#radio-container label {
-  font-size: 16px;
-  font-weight: bold;
-  color: #333;
-}
-
-input[type="radio"] {
-  margin-right: 5px;
-}
-
-/* Socket and RJ45 Fields Styling */
-#socket-needed-container, #rj45-needed-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-label {
-  font-size: 16px;
-  font-weight: 600;
-  color: #555;
-}
-
-input[type="number"] {
-  width: 80px;
-  padding: 8px;
-  text-align: center;
-  border: 1px solid #ddd;
-}
-
-/* Cart Table Styling */
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-th, td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: left;
-}
-
-th {
-  background-color: #f4f4f4;
-  font-weight: bold;
-}
-
-tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
-
-tr:hover {
-  background-color: #f1f1f1;
-}
-
-table thead {
-  position: sticky;
-  top: 0;
-  background-color: #fff;
-}
-
-table tfoot {
-  font-weight: bold;
-  background-color: #f8f8f8;
-}
-
-@media (max-width: 768px) {
-  table {
-    font-size: 14px;
-  }
-  
-  th, td {
-    padding: 6px;
-  }
-
-  table, th, td {
-    display: block; /* Stack the table rows */
-  }
-
-  th {
-    text-align: center;
-  }
-}
-
-
-
-/* Total Section Styling */
-#total, #totalCP {
-  font-size: 1.2rem;
-  color: #333;
-  font-weight: bold;
-  margin-top: 15px;
-}
-
-
-
-.delete-btn:hover {
-  color: #c0392b; /* Darker red on hover */
-} 
-
-#generateInvoice, #reset-btn {
-  background-color: #2196F3;
-  margin-top: 20px;
-  color: white;
-  font-weight: bold;
-  padding: 10px 15px;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-}
-
-#generateInvoice:hover, #reset-btn:hover {
-  background-color: #1976D2;
-}
-
-#generateInvoice:disabled, #reset-btn:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .container {
-    width: 100%;
-    padding: 15px;
-  }
-
-  #radio-container {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .section {
-    margin-bottom: 15px;
-  }
-
-  select, input[type="number"], button {
-    width: 100%;
-  }
-
-  label {
-    font-size: 14px;
-  }
-
-  #total, #totalCP {
-    font-size: 16px;
-  }
-}
-
-@media (max-width: 480px) {
-  h1 {
-    font-size: 1.8rem;
-  }
-
-  h2, h3 {
-    font-size: 1.2rem;
-  }
-
-  table {
-    font-size: 14px;
-  }
-
-  td, th {
-    padding: 10px;
-  }
-
-  .company-name {
-    font-size: 1.2rem;
-  }
-}
-
-/* Quantity Field Styling */
-#quantity {
-  width: 100%;
-  padding: 10px;
-  margin-top: 5px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-}
-
-#quantity:focus {
-  outline: none;
-  border-color: #4CAF50;
-}
-
-/* Styling for the Total Amount section */
-#total-container {
-  font-size: 1.5em;
-  font-weight: bold;
-  padding: 15px;
-  background-color: #fffbcc;
-  color: #d9534f;
-  border: 2px solid #d9534f;
-  border-radius: 10px;
-  text-align: center;
-  margin-top: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Styling for the Total Amount Value */
-#total-container span {
-  color: #28a745;
-  font-weight: bold;
-  font-size: 1.6em;
-}
-
-#total-container p {
-  margin: 5px 0;
-  font-size: 1.5em;
-}
-
-#customer-name,#phone-number, #email, #cutomer-address {
-  width: 20%;
-  padding: 12px;
-  margin: 5px 0 15px;
-  border: 1px solid #4CAF50;
-  border-radius: 5px;
-  font-size: 12px;
-  font-family: 'Arial', sans-serif;
-}
-
-#cutomer-address {
-  width: 70%;
-  padding: 12px;
-  margin: 5px 0 15px;
-  border: 1px solid #4CAF50;
-  border-radius: 5px;
-  font-size: 12px;
-  font-family: 'Arial', sans-serif;
-}
-
-
-label[for="customer-name"] {
-  font-size: 14px;
-  font-weight: 600;
-  color: #4CAF50; /* Green color */
-}
-
-
-label[for="phone-number"] {
-  font-size: 14px;
-  font-weight: 600;
-  color: #4CAF50; /* Green color */
-}
-
-label[for="email"] {
-  font-size: 14px;
-  font-weight: 600;
-  color: #4CAF50; /* Green color */
-}
-
-label[for="cutomer-address"] {
-  font-size: 14px;
-  font-weight: 600;
-  color: #4CAF50; /* Green color */
 }
 
 h2 {
-  text-decoration: underline; /* Underline the text */
-  padding: 10px; /* Add some spacing around the text */
-  border-radius: 5px; /* Optional: Rounded edges for a smoother look */
-  font-weight: bold; /* Make it bold for emphasis */
-  color: #4CAF50; /* Green text color */
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed;
-  z-index: 1000; /* On top of other elements */
-  left: 0;
-  top: 0;
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
+.company-name {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Card Styling */
+.section {
+  background: var(--bg-card);
+  padding: 2rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  margin-bottom: 2rem;
+  transition: var(--transition);
+}
+
+.section:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+/* Grid Layout for Inputs */
+.input-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+input[type="text"],
+input[type="number"],
+select {
+  width: 100% !important;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 1rem;
+  color: var(--text-main);
+  background-color: var(--bg-main);
+  transition: var(--transition);
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+  background-color: #fff;
+}
+
+/* Custom Controls */
+#radio-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem;
+  background: var(--bg-main);
+  border-radius: 8px;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  transition: var(--transition);
+}
+
+.radio-option:hover {
+  background-color: #fff;
+  border-color: var(--border);
+}
+
+/* Buttons */
+button {
   width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  padding: 0.875rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+#add-to-cart-btn {
+  background-color: var(--primary);
+  color: white;
+}
+
+#add-to-cart-btn:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-1px);
+}
+
+#generateInvoice {
+  background-color: var(--secondary);
+  color: white;
+  margin-top: 1rem;
+}
+
+#generateInvoice:hover {
+  background-color: var(--secondary-dark);
+}
+
+#reset-btn {
+  background-color: #ef4444;
+  /* Red 500 */
+  color: white;
+  margin-top: 1rem;
+}
+
+#reset-btn:hover {
+  background-color: #dc2626;
+}
+
+/* Price Details */
+.price-details {
+  display: flex;
+  justify-content: space-around;
+  padding: 1.5rem;
+  background-color: #ecfdf5;
+  /* Emerald 50 */
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
+.price-item {
+  text-align: center;
+}
+
+.price-label {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-bottom: 0.25rem;
+}
+
+.price-value {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--primary-dark);
+}
+
+/* Cart Table */
+.cart-overflow {
+  overflow-x: auto;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  font-size: 0.875rem;
+}
+
+th {
+  background-color: var(--bg-main);
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+
+td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+.delete-btn {
+  background: none;
+  color: #ef4444;
+  padding: 0.5rem;
+  width: auto;
+}
+
+.delete-btn:hover {
+  background: #fef2f2;
+}
+
+/* Summary Section */
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.summary-card {
+  padding: 1.5rem;
+  background: var(--bg-main);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.summary-card.accent {
+  background: #eef2ff;
+  /* Indigo 50 */
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(4px);
+  z-index: 50;
+  align-items: center;
+  justify-content: center;
 }
 
 .modal-content {
-  background-color: #ffffff;
-  margin: 10% auto;
-  padding: 25px;
-  border: 1px solid #ddd;
-  width: 15%;
+  background: white;
+  padding: 2.5rem;
+  border-radius: var(--radius);
+  max-width: 400px;
+  width: 90%;
+  box-shadow: var(--shadow-lg);
   text-align: center;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  font-family: 'Arial', sans-serif;
 }
 
-button {
-  display: block; 
-  margin: 5px auto; /* Center the button and reduce outer spacing */
-  padding: 10px 20px; /* Adjust padding for better fit */
-  font-size: 14px; 
-  font-weight: bold;
-  color: #ffffff;
-  background-color: #007BFF; /* Professional blue */
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  width: 100%;
-  box-sizing: border-box; 
+.modal-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
 }
 
-button:hover {
-  background-color: #0056b3; /* Darker shade of blue on hover */
+/* Responsive */
+@media (max-width: 640px) {
+  .header {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .company-name {
+    text-align: center;
+  }
+
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
 }
-
-button:active {
-  background-color: #003f7f; /* Even darker shade for active state */
-}
-
-button:disabled {
-  background-color: #cccccc;
-  cursor: not-allowed;
-}
-
-.editable input {
-  width: 90%; /* Ensure inputs fit within the cell */
-  padding: 2px;
-  font-size: 14px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-
-
-

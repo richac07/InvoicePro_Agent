@@ -1,153 +1,204 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Invoice Mobile App</title>
+  <title>Estimate Proforma - Smart Ohm</title>
+
+  <!-- Modern Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <!-- Core Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.26/jspdf.plugin.autotable.min.js"></script>
-  
-
-
 </head>
+
 <body>
   <div class="container">
-  <div class="header">
-  <h1 class="company-name">Smart Ohm</h1>
-  </div>
-  <h1>Estimation/ Proforma Invoice App</h1>
+    <!-- Header Section -->
+    <header class="header">
+      <h1 class="company-name">Smart Ohm</h1>
+      <h1>Estimate Generator</h1>
+    </header>
 
-  <div class="section">
-    <label for="customer-name">Customer Name</label>
-    <input type="text" id="customer-name" name="Enter the customer Name" placeholder="Enter Customer Name" required />
-    <label for="phone-number">Phone Number</label>
-    <input type="text" id="phone-number" name="Enter the Phone Number" placeholder="Enter the Phone Number" required />
-    <label for="email">Customer EmailID</label>
-    <input type="text" id="email" name="Enter the customer EmailID" placeholder="Enter the customer EmailID" required />
-  </div>
-
-  <div class="section">
-    <label for="cutomer-address">Customer Address</label>
-    <input type="text" id="cutomer-address" name="Enter the Customer Address" placeholder="Enter the Customer Address" required />
-  </div>
-
-  <h2>Add Items to Proforma Invoice</h2>
-
-  <div class="section">
-    <h3>Select Category</h3>
-  <select id="category-dropdown">
-    <option value="">Select Category</option>
-  </select>
-  </div>
-
-  <div class="section">
-    <h3>Select Subcategory</h3>
-  <select id="subcategory-dropdown">
-    <option value="">Select Subcategory</option>
-  </select>
-  </div>
-
-  <div class="section">
-    <h3>Select Sub-Subcategory</h3>
-  <select id="subsubcategory-dropdown">
-    <option value="">Select Subsubcategory</option>
-  </select>
-  </div>
-
-  <div class="section">
-    <label for="quantity">Quantity:</label>
-    <input type="number" id="quantity" min="1" value="1">
-  </div>
-
-  <div class="section">
-  <div id="radio-container">
-    <!-- Radio buttons will be dynamically added here -->
-  </div>
-  </div>
-
-  <div class="section">
-  <div id="socket-needed-container">
-    <label for="socket-quantity">Sockets :</label>
-    <input type="number" id="socket-quantity" min="0" value="0">
-  </div>
- </div>
-
- <div class="section">
-  <div id="rj45-needed-container">
-    <label for="rj45-quantity">RJ45 :</label>
-    <input type="number" id="rj45-quantity" min="0" value="0">
-  </div>
- </div>
-  
-   <!-- Display Prices -->
-        <div class="section">
-            <h2>Price Details</h2>
-            <p><strong>Cost Price : Rs </strong><span id="cost-price">0.00</span></p>
-            <p><strong>Selling Price: Rs </strong><span id="selling-price">0.00</span></p>
+    <!-- Customer Information Card -->
+    <section class="section">
+      <h2><i class="fas fa-user-circle"></i> Customer Information</h2>
+      <div class="input-grid">
+        <div class="form-group">
+          <label for="customer-name">Full Name</label>
+          <input type="text" id="customer-name" placeholder="John Doe" required>
         </div>
-
-        <!-- Add to Cart Button -->
-        <div class="section">
-            <button id="add-to-cart-btn">Add to Cart</button>
+        <div class="form-group">
+          <label for="phone-number">Phone Number</label>
+          <input type="text" id="phone-number" placeholder="+1 (555) 000-0000" required>
         </div>
-      
-
-
-        <!-- Cart Section -->
-        <div class="section" style="overflow-x: auto;">
-            <h2>Cart Details</h2>
-            <div id="cart"></div>
-
-           
-            <table id="cart-table">
-              <thead>
-                <tr>
-                  <th>Item Name</th>
-                  <th>Quantity</th>
-                  <th>Cost Price</th>
-                  <th>Selling Price</th>
-                  <th>Protocol</th> <!-- Protocol column -->
-                  <th>Socket</th> <!-- Socket Quantity column -->
-                  <th>RJ45</th> <!-- RJ45 Quantity column -->
-                  <th>Total CP</th>
-                  <th>Total Price</th>
-                  <th>Notes</th>
-                  <th>Actions</th> <!-- Delete column -->
-                </tr>
-              </thead>
-              <tbody id="cart-body">
-                <!-- Cart items will be inserted here dynamically -->
-              </tbody>
-            </table>
-            </div>
-            
-            <div class="section">
-              <p>Total Amount : Rs <span id="total">0.00</span></p>
-            <p>Total CP : Rs <span id="totalCP">0.00</span></p>
-            
-            <label for="discount">Discount :</label>
-            <input type="number" id="discount" min="0" value="0">
-            <p> Profit : <span id="profit">0</span> </p>
-            <p> Final Amount After Discount : <span id="finalAmount">0</span> </p>
-            </div>
-            <div class="section">
-            <button id="generateInvoice">Generate Proforma Invoice</button>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="text" id="email" placeholder="john@example.com" required>
         </div>
-      <div class="section">
-        <button id="reset-btn">Create New Estimate</button>
+      </div>
+      <div class="form-group" style="margin-top: 1.5rem;">
+        <label for="cutomer-address">Site Address</label>
+        <input type="text" id="cutomer-address" placeholder="123 Business Way, Suite 100" required>
+      </div>
+    </section>
+
+    <!-- Item Selection Card -->
+    <section class="section">
+      <h2><i class="fas fa-plus-circle"></i> Add Items</h2>
+      <div class="input-grid">
+        <div class="form-group">
+          <label for="category-dropdown">Category</label>
+          <select id="category-dropdown">
+            <option value="">Select Category</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="subcategory-dropdown">Subcategory</label>
+          <select id="subcategory-dropdown">
+            <option value="">Select Subcategory</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="subsubcategory-dropdown">Product</label>
+          <select id="subsubcategory-dropdown">
+            <option value="">Select Product</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="quantity">Item Quantity</label>
+          <input type="number" id="quantity" min="1" value="1">
+        </div>
+      </div>
+
+      <!-- Protocol Selection -->
+      <div class="form-group" style="margin-top: 1.5rem;">
+        <label>Protocol</label>
+        <div id="radio-container">
+          <!-- Dynamic radio options will appear here -->
+        </div>
+      </div>
+
+      <!-- Extras Selection -->
+      <div class="input-grid" style="margin-top: 1.5rem;">
+        <div class="form-group">
+          <div id="socket-needed-container">
+            <label for="socket-quantity">Socket Count</label>
+            <input type="number" id="socket-quantity" min="0" value="0">
+          </div>
+        </div>
+        <div class="form-group">
+          <div id="rj45-needed-container">
+            <label for="rj45-quantity">RJ45 Ports</label>
+            <input type="number" id="rj45-quantity" min="0" value="0">
+          </div>
+        </div>
+      </div>
+
+      <!-- Price Preview -->
+      <div class="price-details">
+        <div class="price-item">
+          <span class="price-label">Cost Price</span>
+          <span class="price-value">Rs <span id="cost-price">0.00</span></span>
+        </div>
+        <div class="price-item">
+          <span class="price-label">Selling Price</span>
+          <span class="price-value">Rs <span id="selling-price">0.00</span></span>
+        </div>
+      </div>
+
+      <button id="add-to-cart-btn" style="margin-top: 1.5rem;">
+        <i class="fas fa-cart-plus"></i> Add to Cart
+      </button>
+    </section>
+
+    <!-- Cart Details Card -->
+    <section class="section">
+      <h2><i class="fas fa-shopping-cart"></i> Cart Details</h2>
+      <div class="cart-overflow">
+        <table id="cart-table">
+          <thead>
+            <tr>
+              <th>Item Name</th>
+              <th>Qty</th>
+              <th>Cost</th>
+              <th>Price</th>
+              <th>Protocol</th>
+              <th>Sk.</th>
+              <th>RJ.</th>
+              <th>Total CP</th>
+              <th>Total SP</th>
+              <th>Notes</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="cart-body">
+            <!-- Items dynamically added -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="summary-grid">
+        <div class="summary-card">
+          <span class="price-label">Gross Total</span>
+          <span class="price-value" style="color: var(--text-main)">Rs <span id="total">0.00</span></span>
+        </div>
+        <div class="summary-card">
+          <span class="price-label">Internal Total CP</span>
+          <span class="price-value" style="color: var(--text-muted)">Rs <span id="totalCP">0.00</span></span>
+        </div>
+      </div>
+
+      <div class="input-grid" style="margin-top: 1.5rem;">
+        <div class="form-group">
+          <label for="discount">Apply Discount (%)</label>
+          <input type="number" id="discount" min="0" max="100" value="0">
+        </div>
+      </div>
+
+      <div class="summary-grid">
+        <div class="summary-card accent">
+          <span class="price-label">Final Amount</span>
+          <span class="price-value" style="color: var(--secondary)">Rs <span id="finalAmount">0.00</span></span>
+        </div>
+        <div class="summary-card accent">
+          <span class="price-label">Net Profit</span>
+          <span class="price-value">Rs <span id="profit">0.00</span></span>
+        </div>
+      </div>
+
+      <div class="input-grid" style="margin-top: 2rem;">
+        <button id="generateInvoice">
+          <i class="fas fa-file-invoice-dollar"></i> Generate PDF Estimate
+        </button>
+        <button id="reset-btn">
+          <i class="fas fa-redo"></i> Create New Estimate
+        </button>
+      </div>
+    </section>
+  </div>
+
+  <!-- Custom Confirmation Modal -->
+  <div id="custom-modal" class="modal">
+    <div class="modal-content">
+      <h3 style="margin-bottom: 1rem;">Confirm Reset</h3>
+      <p style="color: var(--text-muted)">Are you sure you want to start a new estimate? Current data will be lost.</p>
+      <div class="modal-buttons">
+        <button id="confirm-btn" style="background-color: var(--primary)">Yes, Reset</button>
+        <button id="cancel-btn" style="background-color: var(--text-muted)">Cancel</button>
       </div>
     </div>
-    <div id="custom-modal" class="modal">
-      <div class="modal-content">
-        <p>Do you want to create a new estimate?</p>
-        <button id="confirm-btn">Yes</button>
-        <button id="cancel-btn">No</button>
-      </div>
-    </div>
-    
+  </div>
+
   <script src="./script.js"></script>
 </body>
+
 </html>
