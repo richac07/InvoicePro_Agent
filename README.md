@@ -1,4 +1,4 @@
-# Estimate & Proforma Invoice App
+# INVOICE PRO AGENT
 
 A lightweight, client-side web application for generating professional estimates and proforma invoices for **Smart Ohm**. The app allows users to select products from an Excel-based database, manage a shopping cart, and generate PDF invoices.
 
